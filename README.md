@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Faultwise
 
-## Getting Started
+Prototipo de tesis para monitoreo y predicción de fallas en pipelines CI/CD.
 
-First, run the development server:
+## Desarrollo
 
-```bash
+Requiere Node.js 22.18 o superior y npm.
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Verificación
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run lint
+npm test
+npm run format:check
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`npm run format` aplica el formato de Prettier.
 
-## Learn More
+## Organización
 
-To learn more about Next.js, take a look at the following resources:
+- `app/page.tsx`: resumen.
+- `app/predicciones`, `app/alertas`, `app/ejecuciones`, `app/evaluacion`: rutas de cada pantalla, compatibles con enlaces directos y navegación del navegador.
+- `app/components`: interfaz y componentes interactivos.
+- `app/lib/types.ts`: contratos de datos compartidos.
+- `app/lib/demo-data.ts`: ejecuciones y alertas de demostración.
+- `app/lib/executions.ts`: búsqueda, filtros y formato de fechas.
+- `tests`: pruebas de lógica de filtros y fechas.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Usamos Next.js App Router, React, TypeScript y Tailwind CSS 4. Los estilos visuales existentes se conservan en `app/globals.css`; Tailwind se puede usar para la composición de componentes nuevos. El diálogo de ejecución utiliza el elemento nativo `dialog`, con cierre por Escape, foco contenido y devolución del foco al control de origen.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Datos de demostración
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+No hay conexión con backend ni modelo predictivo. La predicción es una heurística ilustrativa y su historial dura mientras la vista permanece montada. Los períodos del historial se calculan respecto al 8 de noviembre de 2026 para mantener reproducibles los ejemplos. Las tarjetas de indicadores muestran valores ilustrativos; la matriz de confusión es un ejemplo independiente.
